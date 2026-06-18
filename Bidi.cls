@@ -129,14 +129,17 @@ public class Bidi {
     return input.charAt(0) > 1487 && input.charAt(0) < 1515;
   }
   //num characters: 0-9 % $ € £ ¥ #
-  private static boolean isNum(string input) {
-    return (input.charAt(0) > 47 &&
-      input.charAt(0) < 58) ||
-      (input.charAt(0) > 34 &&
-      input.charAt(0) < 38) ||
-      (input.charAt(0) == 128) ||
-      (input.charAt(0) == 65505) ||
-      (input.charAt(0) == 65509);
+  private static boolean isNum(String input) {
+    if (input == null || input.length() == 0) return false;
+    integer c = input.charAt(0);
+    return (c > 47 && c < 58)       ||
+           (c > 34 && c < 38)       ||
+           (c == 128)               ||
+           (c == 65505)             ||
+           (c == 65509)             ||
+           (c >= 188 && c <= 190)   ||
+           (c >= 8528 && c <= 8543) ||
+           (c == 8585);
   }
   //numRtlLoose characters: , . + - / :
   private static boolean isNumRtlLoose(string input) {
