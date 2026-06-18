@@ -132,15 +132,16 @@ public class Bidi {
   private static boolean isNum(String input) {
     if (input == null || input.length() == 0) return false;
     integer c = input.charAt(0);
-    return (c > 47 && c < 58)       ||
-           (c > 34 && c < 38)       ||
-           (c == 128)               ||
-           (c == 65505)             ||
-           (c == 65509)             ||
-           (c >= 188 && c <= 190)   ||
-           (c >= 8528 && c <= 8543) ||
-           (c == 8585);
+    return (c > 47 && c < 58) ||        // ASCII 0-9
+           (c > 34 && c < 38) ||        // ASCII #, $, %
+           (c == 128) ||                // € (Euro sign)
+           (c == 65505) ||              // ￠ (Fullwidth Cent sign)
+           (c == 65509) ||              // ￥ (Fullwidth Yen sign)
+           (c >= 188 && c <= 190) ||    // Latin-1 fractions: ¼ (188), ½ (189), ¾ (190)
+           (c >= 8528 && c <= 8543) ||  // Number Forms fractions: ⅐ (8528) to ⅟ (8543)
+           (c == 8585);                 // Number Forms fraction: ↉ (8585)
   }
+
   //numRtlLoose characters: , . + - / :
   private static boolean isNumRtlLoose(string input) {
     return (input.charAt(0) > 42 && input.charAt(0) < 48) || (input.charAt(0) == 58);
